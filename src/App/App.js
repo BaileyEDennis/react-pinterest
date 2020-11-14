@@ -1,12 +1,15 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import firebase from 'firebase/app';
 import fbConnection from '../helpers/data/connection';
 import './App.scss';
-import Auth from '../components/auth/index';
 import MyNavbar from '../components/myNavbar';
-import BoardContainer from '../components/BoardContainer';
+import Routes from '../helpers/routes';
+// import { patchFBBoardkeys, patchFBPinkeys } from '../helpers/data/patchFBkeys';
 
+// patchFBBoardkeys();
 fbConnection();
+// patchFBPinkeys();
 class App extends React.Component {
   state = {
     authed: false,
@@ -28,20 +31,12 @@ class App extends React.Component {
 
   render() {
     const { authed } = this.state;
-    const loadComponent = () => {
-      let component = '';
-      if (authed) {
-        component = <BoardContainer />;
-      } else {
-        component = <Auth />;
-      }
-      return component;
-    };
-
     return (
       <div className="App">
-        <MyNavbar authed={authed}/>
-        {loadComponent()}
+        <Router>
+        <MyNavbar authed={authed} />
+        <Routes authed={authed} />
+        </Router>
       </div>
     );
   }
