@@ -1,21 +1,9 @@
 import React from 'react';
-import BoardContainer from '../components/BoardContainer';
-import Auth from '../components/auth';
 
-export default function PinForm({ authed }) {
-  const loadComponent = () => {
-    let component = '';
-    if (authed) {
-      component = <BoardContainer />;
-    } else {
-      component = <Auth />;
-    }
-    return component;
-  };
+export default function PinForm() {
   return (
     <div>
-      <h1>Pin Ferrm</h1>
-      {loadComponent()}
+      <h1>Pin Form</h1>
     </div>
   );
 }

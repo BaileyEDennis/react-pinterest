@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class BoardCard extends Component {
   render() {
@@ -11,6 +12,7 @@ export default class BoardCard extends Component {
           <div className="card-body">
             <h5 className="card-title">{board.name}</h5>
             <p className="card-text">{board.description}</p>
+            <Link className='btn btn-primary' to={`/boards/${board.firebaseKey}`}>View Pins</Link>
           </div>
         </div>
       </div>

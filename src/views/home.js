@@ -1,19 +1,23 @@
 import React from 'react';
 import Auth from '../components/auth';
+import Loader from '../components/Loader';
 
-export default function Home({ authed, name }) {
+export default function Home({ user }) {
   const loadComponent = () => {
     let component = '';
-    if (authed) {
-      component = <h3>Welcome to Pinterest!</h3>;
+    if (user === null) {
+      component = <Loader />;
+    } else if (user) {
+      component = 'Load all non-private pins here';
     } else {
       component = <Auth />;
     }
     return component;
   };
+
   return (
     <div>
-      <h1>Home Page: {name}</h1>
+      <h1>Welcome to React-Pinterest</h1>
       {loadComponent()}
     </div>
   );
