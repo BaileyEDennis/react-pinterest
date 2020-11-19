@@ -39,7 +39,7 @@ export default function MyNavbar(props) {
               </Link>
             </NavItem>
           </Nav>
-          <SearchInput {...props} />
+          <SearchInput />
           {/* "Optional chaining operator: (?.)"  */}
           {
             user
