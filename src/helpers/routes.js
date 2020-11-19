@@ -4,7 +4,7 @@ import Home from '../views/home';
 import BoardForm from '../views/boardForm';
 import Boards from '../views/boards';
 import PinDetails from '../views/pinDetails';
-import PinForm from '../views/pinForm';
+import PinForm from '../components/forms/pinForm';
 import Pins from '../views/pins';
 import SingleBoard from '../views/singleBoard';
 import NotFound from '../views/notFound';
