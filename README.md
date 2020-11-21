@@ -3,7 +3,7 @@
 We have cloned and re-created a mini version of Pinterest. This app features full C.R.U.D capability in React, and shows off a few other features, such as user log in, a search function, and the ability to display non-private pins to all users.
 
 ## Screenshot
-
+![image](./images/scrncap.png)
 will edit
 
 ## Technology Used
