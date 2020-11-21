@@ -1,6 +1,7 @@
 import React from 'react';
 import Auth from '../components/auth';
 import Loader from '../components/Loader';
+import PublicPins from '../components/publicPins';
 
 export default function Home({ user }) {
   const loadComponent = () => {
@@ -8,7 +9,7 @@ export default function Home({ user }) {
     if (user === null) {
       component = <Loader />;
     } else if (user) {
-      component = 'Load all non-private pins here';
+      component = <PublicPins />;
     } else {
       component = <Auth />;
     }
