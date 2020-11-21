@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from '../views/home';
 import BoardForm from '../views/boardForm';
 import Boards from '../views/boards';
@@ -48,12 +48,29 @@ export default function Routes({ user }) {
           path='/board-form'
           component={() => <BoardForm user={user} />}
         />
-        <Route
+        <PrivateRoute
           exact
           path='/boards'
-          component={() => <Boards user={user} />}
+          component={Boards}
+          user={user}
         />
         <Route component={NotFound} />
       </Switch>
   );
 }
+
+const PrivateRoute = ({ component: Component, user, ...rest }) => {
+  const routeChecker = (taco) => (user
+    ? (<Component {...taco} user={user}/>)
+    : (<Redirect to={{ pathname: '/', state: { from: taco.location } }}/>));
+
+  return <Route {...rest} render={(props) => routeChecker(props)} />;
+};
+
+// const SuperPrivateRoute = ({ component: Component, user, ...rest }) => {
+//   const routeChecker = (taco) => (user.admin
+//     ? (<Component {...taco} user={user}/>)
+//     : (<Redirect to={{ pathname: '/super-duper-private', state: { from: taco.location } }}/>));
+
+//   return <Route {...rest} render={(props) => routeChecker(props)} />;
+// };

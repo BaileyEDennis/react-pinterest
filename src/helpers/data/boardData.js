@@ -49,7 +49,6 @@ const deleteBoard = (boardUid) => {
   getBoardPins(boardUid)
     .then((response) => {
       response.forEach((pin) => {
-        console.warn(pin.pinId);
         deletePin(pin.pinId);
       });
     })
