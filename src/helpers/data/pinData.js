@@ -24,7 +24,7 @@ const getSinglePin = (pinId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-const deletePin = (pinUid) => axios.delete(`${baseUrl}/Pins/${pinUid}.json`);
+const deletePin = (pinUid) => axios.delete(`${baseUrl}/pins/${pinUid}.json`);
 
 const createPin = (object) => new Promise((resolve, reject) => {
   axios.post(`${baseUrl}/pins.json`, object)

@@ -48,8 +48,9 @@ const getSingleBoard = (boardId) => new Promise((resolve, reject) => {
 const deleteBoard = (boardUid) => {
   getBoardPins(boardUid)
     .then((response) => {
-      response.forEach((item) => {
-        deletePin(item.uid);
+      response.forEach((pin) => {
+        console.warn(pin.pinId);
+        deletePin(pin.pinId);
       });
     })
     .then(() => {

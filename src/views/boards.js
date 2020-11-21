@@ -1,10 +1,11 @@
 import React from 'react';
-import { getAllUserBoards } from '../helpers/data/boardData';
+import { getAllUserBoards, deleteBoard, getBoardPins } from '../helpers/data/boardData';
 import BoardsCard from '../components/cards/boardCards';
 import Loader from '../components/Loader';
 import getUid from '../helpers/data/authData';
 import BoardForm from '../components/forms/boardForm';
 import AppModal from '../components/appModal';
+import { deletePinsOfBoards } from '../helpers/data/pinData';
 
 // update boardData, clean up firebase data, update singleBoard
 export default class Boards extends React.Component {
@@ -29,6 +30,15 @@ export default class Boards extends React.Component {
     });
   };
 
+  deleteBoard = (firebaseKey) => {
+    deleteBoard(firebaseKey);
+    getBoardPins(firebaseKey).then((response) => {
+      response.forEach((pin) => {
+        deletePinsOfBoards(pin.firebaseKey);
+      });
+    });
+  }
+
   setLoading = () => {
     this.timer = setInterval(() => {
       this.setState({ loading: false });
@@ -42,7 +52,7 @@ export default class Boards extends React.Component {
   render() {
     const { boards, loading } = this.state;
     const showBoards = () => boards.map((board) => (
-        <BoardsCard key={board.firebaseKey} board={board} />
+        <BoardsCard key={board.firebaseKey} board={board} boardDataFunction={this.deleteBoard} />
     ));
     return (
       <>
