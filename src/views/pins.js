@@ -1,5 +1,10 @@
 import React from 'react';
-import { getUserPins } from '../helpers/data/pinData';
+import {
+  getUserPins,
+  deletePin,
+  deletePinsOfBoards,
+  getpinsOfBoards,
+} from '../helpers/data/pinData';
 import PinsCard from '../components/cards/pinCards';
 import Loader from '../components/Loader';
 import getUid from '../helpers/data/authData';
@@ -12,6 +17,15 @@ export default class Boards extends React.Component {
     pins: [],
     loading: true,
   };
+
+  deleteAPin = (firebaseKey) => {
+    deletePin(firebaseKey);
+    getpinsOfBoards(firebaseKey).then((response) => {
+      response.forEach((pin) => {
+        deletePinsOfBoards(pin.firebaseKey);
+      });
+    });
+  }
 
   componentDidMount() {
     this.getPins();
@@ -42,7 +56,7 @@ export default class Boards extends React.Component {
   render() {
     const { pins, loading } = this.state;
     const showPins = () => pins.map((pin) => (
-      <PinsCard key={pin.firebaseKey} pinData={pin} />
+      <PinsCard key={pin.firebaseKey} pinData={pin} pinDataFunc={this.deleteAPin} onUpdate={this.getPins} />
     ));
     return (
       <>

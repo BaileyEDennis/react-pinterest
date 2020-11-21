@@ -7,6 +7,7 @@ import {
   updatePin,
   addPinsOfBoards,
   deletePinsOfBoards,
+  getpinsOfBoards,
 } from '../../helpers/data/pinData';
 import { getAllUserBoards, getBoards } from '../../helpers/data/boardData';
 
@@ -108,6 +109,11 @@ export default class PinForm extends Component {
         addPinsOfBoards(pinBoardObj);
       })
         .then(() => {
+          getpinsOfBoards(this.state.firebaseKey).then((response) => {
+            response.forEach((pinboard) => {
+              deletePinsOfBoards(pinboard.firebaseKey);
+            });
+          });
           this.props.onUpdate?.(this.props.pin.firebaseKey);
           this.setState({ success: true });
         });

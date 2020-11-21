@@ -51,6 +51,19 @@ const getUserPins = (userId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const getpinsOfBoards = (pinId) => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins-boards.json?orderBy="pinId"&equalTo="${pinId}"`).then((response) => {
+    const pinResponse = response.data;
+    const pinArray = [];
+    if (pinResponse) {
+      Object.keys(pinResponse).forEach((pin) => {
+        pinArray.push(pinResponse[pin]);
+      });
+    }
+    resolve(pinArray);
+  }).catch((error) => reject(error));
+});
+
 const addPinsOfBoards = (dataObject) => new Promise((resolve, reject) => {
   axios.post(`${baseUrl}/pins-boards.json`, dataObject).then((response) => {
     const update = { firebaseKey: response.data.name };
@@ -71,4 +84,5 @@ export {
   getUserPins,
   addPinsOfBoards,
   deletePinsOfBoards,
+  getpinsOfBoards,
 };
