@@ -4,7 +4,6 @@ We have cloned and re-created a mini version of Pinterest. This app features ful
 
 ## Screenshot
 ![image](./images/scrncap.png)
-will edit
 
 ## Technology Used
 
