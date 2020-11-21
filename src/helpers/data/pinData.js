@@ -18,6 +18,12 @@ const getAllPins = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const getPublicPins = () => new Promise((resolve, reject) => {
+  axios.get(`${baseUrl}/pins.json?orderBy="private"&equalTo="false"`).then((response) => {
+    resolve(Object.values(response.data));
+  }).catch((error) => reject(error));
+});
+
 const getSinglePin = (pinId) => new Promise((resolve, reject) => {
   axios.get(`${baseUrl}/pins/${pinId}.json`).then((response) => {
     resolve(response.data);
@@ -85,4 +91,5 @@ export {
   addPinsOfBoards,
   deletePinsOfBoards,
   getpinsOfBoards,
+  getPublicPins,
 };
